@@ -1,0 +1,6 @@
+﻿.env
+*.pem
+id_ed25519*
+*.dump
+*.tfstate*
+vendor/
