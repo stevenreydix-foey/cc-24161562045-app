@@ -1,0 +1,8 @@
+{
+    "name": "cc/bukutamu",
+    "description": "Buku tamu PHP + PostgreSQL (Cloud Computing)",
+    "type": "project",
+    "require": {
+        "php": ">=8.3"
+    }
+}

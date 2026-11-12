@@ -1,0 +1,11 @@
+
+.git
+.env
+*.sql
+*.dump
+*.tfstate*
+vendor/
+docs/
+docker-compose.yml
+# manifest Kubernetes P8 (berisi password latihan)
+k8s/

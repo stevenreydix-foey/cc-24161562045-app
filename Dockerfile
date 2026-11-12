@@ -1,3 +1,12 @@
+
+# tahap 1: pasang dependensi PHP dengan Composer
+FROM composer:2 AS vendor
+WORKDIR /app
+COPY composer.json composer.lock ./
+RUN composer install --no-dev --no-interaction \
+    --prefer-dist --optimize-autoloader
+
+# tahap 2: image akhir yang dijalankan
 FROM php:8.4-apache
 
 # konfigurasi PHP produksi
@@ -15,6 +24,9 @@ RUN sed -i 's/^Listen 80$/Listen ${PORT}/' /etc/apache2/ports.conf \
  && sed -i 's/<VirtualHost \*:80>/<VirtualHost *:${PORT}>/' \
       /etc/apache2/sites-available/000-default.conf \
  && echo 'FallbackResource /index.php' > /etc/apache2/conf-enabled/fallback.conf
+
+# salin hasil dependensi dari tahap Composer
+COPY --from=vendor /app/vendor /var/www/html/vendor
 
 # kode aplikasi
 COPY . /var/www/html/
